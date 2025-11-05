@@ -167,13 +167,13 @@ DS_FIELDS = [
 ]
 
 IRREGULAR_GRIDS = {
-    'SMAP_L3': 0.35,
-    'SMOS_L3': 0.25,
-    'SMOS_IC': 0.25,
-    'ASCAT': 0.1,
+    'SMAP_L3': 0.35, # 36 km
+    'SMOS_L3': 0.25, # 25 km
+    'SMOS_IC': 0.25, # 25 km
+    'ASCAT': 0.1, # 12.5 km
     'SMOS_L2': 0.135,  # 15km
     'SMOS_SBPCA': 0.135,  # 15km
-    'SMAP_L2': 0.35,  # 35km
+    'SMAP_L2': 0.35,  # 36km
 }
 
 START_TIME = datetime(1978, 1, 1).strftime('%Y-%m-%d')

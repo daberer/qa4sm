@@ -4,12 +4,8 @@
   <!-- First dropdown - takes 50% width on large screens -->
   <div class="flex flex-column lg:w-6 w-10">
     <span class="p-float-label">
-      <p-dropdown id="metricSelector-map"
-                  [options]="metrics"
-                  [(ngModel)]="selectedMetric"
-                  optionLabel="metric_pretty_name"
-                  (onChange)="onMetricChange($event)"
-                  [style]="{'width': '100%'}">
+      <p-dropdown id="metricSelector-map" [options]="metrics" [(ngModel)]="selectedMetric"
+        optionLabel="metric_pretty_name" (onChange)="onMetricChange($event)" [style]="{'width': '100%'}">
       </p-dropdown>
       <label for="metricSelector-map">Select map metric</label>
     </span>
@@ -18,13 +14,10 @@
   <!-- Second dropdown - takes 50% width on large screens -->
   <div class="flex flex-column lg:w-6 w-10">
     <span class="p-float-label">
-      <p-dropdown id="layer-select" 
-                  [options]="getAvailableLayersForCurrentMetric()"
-                  [(ngModel)]="selectedLayerForMetric[selectedMetric?.metric_query_name]" 
-                  optionLabel="name"
-                  [style]="{'width':'100%'}" 
-                  (onChange)="onLayerSelectionChange(selectedMetric?.metric_query_name, $event.value)"
-                  [disabled]="getAvailableLayersForCurrentMetric()?.length <= 1">
+      <p-dropdown id="layer-select" [options]="getAvailableLayersForCurrentMetric()"
+        [(ngModel)]="selectedLayerForMetric[selectedMetric?.metric_query_name]" optionLabel="name"
+        [style]="{'width':'100%'}" (onChange)="onLayerSelectionChange(selectedMetric?.metric_query_name, $event.value)"
+        [disabled]="getAvailableLayersForCurrentMetric()?.length <= 1">
       </p-dropdown>
       <label for="layer-select">Select Layer</label>
     </span>
@@ -44,10 +37,15 @@
 <div class="map-wrapper">
   <div class="map-container" [class.map-loading]="isLoading" style="width: 100%;height: 600px" id="imap">
 
-    <!-- Loading overlay -->
+    <!-- Enhanced Loading Overlay with PrimeNG Spinner -->
     <div *ngIf="isLoading" class="map-loading-overlay">
-      <div class="loading-spinner"></div>
-      <span class="loading-text">Loading map...</span>
+      <div class="spinner-container">
+        <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
+        <div class="loading-content">
+          <span class="loading-text">Loading map data...</span>
+          <span class="loading-subtext">Please wait</span>
+        </div>
+      </div>
     </div>
 
     <!-- Reset button -->
@@ -57,8 +55,7 @@
 
     <div *ngIf="colorbarData && colorbarData.is_categorical === false" class="colorbar-container">
       <div class="colorbar-wrapper">
-        <div class="colorbar-gradient" [style.background]="colorbarData.gradient">
-        </div>
+        <div class="colorbar-gradient" [style.background]="colorbarData.gradient"></div>
         <div class="colorbar-labels">
           <span class="colorbar-min">{{ colorbarData.vmin | number:'1.1-1' }}</span>
           <span class="colorbar-title">{{ colorbarData.metric_name }}</span>
@@ -67,6 +64,8 @@
       </div>
     </div>
   </div>
+
+  <button (click)="toggleProjection()">Toggle 4326/3857</button>
 
   <!-- Map Footer with Attribution -->
   <div class="map-footer">

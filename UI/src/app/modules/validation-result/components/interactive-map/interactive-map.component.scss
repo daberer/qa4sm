@@ -67,6 +67,8 @@
   }
 }
 
+
+/* Enhanced Loading Overlay */
 .map-loading-overlay {
   position: absolute;
   top: 0;
@@ -74,27 +76,77 @@
   right: 0;
   bottom: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   z-index: 1000;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-in;
+}
 
-  .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #007bff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  .pi-spinner {
+    color: #007bff;
+    filter: drop-shadow(0 2px 4px rgba(0, 123, 255, 0.3));
+  }
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loading-text {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.loading-subtext {
+  color: #6c757d;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spinner-container {
+    padding: 1.5rem;
+
+    .pi-spinner {
+      font-size: 2.5rem !important;
+    }
   }
 
   .loading-text {
-    color: #6c757d;
     font-size: 0.9rem;
-    font-weight: 500;
+  }
+
+  .loading-subtext {
+    font-size: 0.8rem;
   }
 }
 
